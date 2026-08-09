@@ -1,0 +1,24 @@
+class Solution {
+    public void rotate(int[] nums, int k) {
+        int n= nums.length;
+        k=k%n;
+        //assigning first k element in temp
+        int[] temp= new int[n];
+        //for loop chlana pdega  element ko temp m dalne k liye
+        for(int i=0;i<=k;i++){
+            temp[i]=nums[i];
+        }
+        //shift krna h
+        for(int i=k;i<n;i++){
+            nums[i-k]=nums[i];
+
+        }
+        //temp ki value array m dalni pdegi
+        for(int i=n-k;i<n;i++){
+            nums[i]=temp[i-(n-k)];
+        }
+       
+
+        
+    }
+}

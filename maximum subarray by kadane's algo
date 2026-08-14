@@ -1,0 +1,21 @@
+class Solution {
+    public int maxSubArray(int[] nums) {
+        int sum=0;
+        int n= nums.length;
+        int maxi=Integer.MIN_VALUE;
+        for(int i=0;i<n;i++){
+        // values k sum ek sum var m dal diya
+            sum=sum+nums[i];
+            // maxi m sbse bda valure dal diya 
+            maxi=Math.max(maxi,sum);
+            // sum negative hoga to ignr krdenge or sum ko 0 krdenge
+            if(sum<0){
+                sum=0;
+            }
+
+
+        }
+        return maxi;
+
+    }
+}

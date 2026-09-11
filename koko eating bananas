@@ -1,0 +1,44 @@
+
+import java.util.*;
+
+class Solution {
+
+    private long calculateTotalHours(int[] piles, int speed) {
+        long totalH = 0;
+
+        for (int bananas : piles) {
+            totalH += (int) Math.ceil((double) bananas / speed);
+        }
+
+        return totalH;
+    }
+
+    public int minEatingSpeed(int[] piles, int h) {
+
+        int maxpile = Arrays.stream(piles).max().getAsInt();
+
+        int low = 1;
+        int high = maxpile;
+
+        int ans = maxpile;
+
+        while (low <= high) {
+
+            int mid = low + (high - low) / 2;
+
+            long totalH = calculateTotalHours(piles, mid);
+
+            if (totalH <= h) {
+                // Koko can finish at this speed.
+                // Try to find a smaller speed.
+                ans = mid;
+                high = mid - 1;
+            } else {
+                // Speed is too slow.
+                low = mid + 1;
+            }
+        }
+
+        return ans;
+    }
+}

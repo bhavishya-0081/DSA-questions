@@ -1,0 +1,54 @@
+class Solution {
+    // function to give possible days at which flowers will bloom
+    public static boolean ispossibleDays(int [] bloomDay,int day,int m,int k){
+        // inititalise counter or bouquet counter
+        int count=0;
+        int bouquet=0;
+        for(int bloom: bloomDay){
+            if(bloom<=day){
+                count++;
+                //agr count = k then bouqut is ready reset the counter 
+                if(count==k){
+                    bouquet++;
+                    count=0;
+                }
+            }
+            else{
+                count=0;// consucutive flowes nhi h
+            }
+        }
+        return bouquet >=m;
+    }
+
+    public int minDays(int[] bloomDay, int m, int k) {
+        //minimum day to make required bouquet
+        long required= (long)m*k;
+        if(required>bloomDay.length)return -1;
+        int minDay=Integer.MAX_VALUE;// very large value
+        int maxDay=Integer.MIN_VALUE;// very small value 
+        for(int bloom: bloomDay){
+            minDay=Math.min(minDay,bloom);
+            maxDay=Math.max(maxDay,bloom);
+        }
+        // binary search
+        int low=minDay;
+        int high=maxDay;
+        int result=-1;
+        while(low<=high){
+            int mid=(low+high)/2;
+            if(ispossibleDays( bloomDay, mid,m, k)){
+                result=mid;
+                high=mid-1;
+        
+            }
+            else{
+                low=mid+1;
+            }
+        }
+        return result;
+
+
+
+        
+    }
+}
